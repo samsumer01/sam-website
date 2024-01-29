@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive Flow Page</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #000; /* Small black background */
+    color: #fff; /* White text color for contrast */
+  }
+  .container {
+    text-align: center;
+    padding: 20px;
+  }
+  .button {
+    display: inline-block;
+    margin: 10px;
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative; /* Position relative for line drawing */
+  }
+  .button:not(:last-child)::after {
+    content: '';
+    width: 100px;
+    height: 2px;
+    background-color: #fff; /* White line color */
+    position: absolute;
+    top: 50%;
+    right: -100px; /* Line starts from the right side of the button */
+  }
+  .message {
+    margin-top: 20px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+  <h2>What are you doing?</h2>
+  <div id="activity-buttons">
+    <button class="button" onclick="showMessage('study')">Study</button>
+    <button class="button" onclick="showMessage('music')">Listen music</button>
+    <button class="button" onclick="showMessage('busy')">Busy Now</button>
+    <button class="button" onclick="showMessage('relax')">Relax</button>
+    <button class="button" onclick="showMessage('welcome')">Welcome</button>
+  </div>
+
+  <div id="message" class="message"></div>
+</div>
+
+<script>
+  function showMessage(activity) {
+    let message = '';
+    switch (activity) {
+      case 'study':
+        message = 'Study hard for your success.';
+        break;
+      case 'music':
+        message = 'Enjoy the music!';
+        break;
+      case 'busy':
+        message = 'Hope you get some free time soon.';
+        break;
+      case 'relax':
+        message = 'It\'s important to relax.';
+        break;
+    }
+
+    const messageDiv = document.getElementById('message');
+    messageDiv.textContent = message;
+
+    setTimeout(() => {
+      askMood();
+    }, 2000); // Wait 2 seconds before asking mood
+  }
+
+  function askMood() {
+    const messageDiv = document.getElementById('message');
+    messageDiv.innerHTML = `
+      <h2>How do you feel?</h2>
+      <button class="button" onclick="showEmoticon('happy')">Happy 😊</button>
+      <button class="button" onclick="showEmoticon('sad')">Sad 😐</button>
+      <button class="button" onclick="showEmoticon('enjoy')">Enjoy Life 😄</button>
+    `;
+  }
+
+  function showEmoticon(mood) {
+    const messageDiv = document.getElementById('message');
+    switch (mood) {
+      case 'happy':
+        messageDiv.textContent = 'Glad you feel happy! 😊';
+        break;
+      case 'sad':
+        messageDiv.textContent = 'Sorry to hear that. 😐';
+        break;
+      case 'enjoy':
+        messageDiv.textContent = 'Enjoy every moment! 😄';
+        break;
+    }
+  }
+</script>
+</body>
+</html>
